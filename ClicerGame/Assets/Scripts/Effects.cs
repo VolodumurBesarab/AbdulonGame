@@ -29,17 +29,4 @@ public class Effects : MonoBehaviour
     {
         text.text = "+ " + value;
     } 
-
-    /*
-    public void SetPosition(Vector2 position)
-    {
-        transform.position = position;
-    }
-    
-    
-    public void SetColor()
-    {
-        text.color = Color.yellow;
-    }
-    */
 }
