@@ -15,6 +15,7 @@ public class MainScript : MonoBehaviour
     public float idlemoney;
     public float moneyfloat;
     public string boostIsActive;
+    public OfflineIncome offlineIncome;
     public ShopScript shopScript;
     public GameObject boostBtn;
     public BoosterScript boosterScript;
@@ -60,6 +61,7 @@ public class MainScript : MonoBehaviour
         StartCoroutine(IdleFarm());
         StartCoroutine(SaveGameMin());
 
+        offlineIncome.CalculateOfflineIncome(idlemoney, moneyfloat);
     }
 
     public void ClDmgCount(int lvl)
@@ -115,11 +117,6 @@ public class MainScript : MonoBehaviour
         StartCoroutine(SaveGameMin());
     }
 
-    void Update()
-    {
-        //moneytext.text = money.ToString();
-    }
-
     public void IsStart()
     {
         PlayerPrefs.SetInt("Moneyfloat", 0);
@@ -154,7 +151,6 @@ public class MainScript : MonoBehaviour
 
     public void ExitButton()
     {
-        //Save();
         Save();
         Application.Quit();
     }

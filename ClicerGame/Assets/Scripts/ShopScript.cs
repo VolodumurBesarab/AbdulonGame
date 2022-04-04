@@ -97,7 +97,7 @@ public class ShopScript : MonoBehaviour
                 }
                 break;
             case 1:
-                Debug.Log(id);
+                //Debug.Log(id);
                 if (price[id] <= mainScript.moneyfloat && !dmgBtn.activeSelf)
                 {
                     dmgBtn.SetActive(true);
