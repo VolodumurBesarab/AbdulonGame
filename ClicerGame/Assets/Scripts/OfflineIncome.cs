@@ -2,23 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OfflineIncome : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public MainScript mainScript;
+    public GameObject massage;
+    
+    public void CalculateOfflineIncome(float income)
     {
-        
-    }
+        int persent = 1; //ділення офф заррбітка
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void CalculateOfflineIncome()
-    {
         var lastPlayedTime = DateTime.Parse(PlayerPrefs.GetString("LastPlayedTime", null));
 
         if (lastPlayedTime == null)
@@ -30,11 +24,29 @@ public class OfflineIncome : MonoBehaviour
         if (secondSpan > timeSpanRestriction)
             secondSpan = timeSpanRestriction;
 
-        //float totalDamage = (float)secondSpan * GetPa
+        float totalDamage = (float)secondSpan * income / persent;
+
+        TimeSet(secondSpan, totalDamage);
+        mainScript.AddMoney(totalDamage);
+        
+
     }
 
-    private void OnApplicationQuit()
+    private void TimeSet(double time, float totalDamage)
     {
-        PlayerPrefs.SetString("LastPlayedTime", DateTime.UtcNow.ToString());
+        int hour, min, sec;
+
+        hour = (int)time / 3600;
+
+        min = (int)time % 3600 / 60;
+
+        sec = (int)time % 3600 % 60;
+
+        massage.GetComponentInChildren<Text>().text = "You was offline " + hour + " hour " + min + " min " + sec + " sec and mine " + (int)totalDamage + " ore";
     }
+    public void HideMassage()
+    {
+        Destroy(massage);
+    }
+
 }

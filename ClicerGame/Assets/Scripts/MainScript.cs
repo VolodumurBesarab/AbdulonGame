@@ -20,6 +20,7 @@ public class MainScript : MonoBehaviour
     public BoosterScript boosterScript;
     public EnterNameScript enterName;
     public PlanetHp planetHp;
+    public OfflineIncome offlineIncome;
     public EffectsController effectsController;
     private string playerName;
     public int[] upgradelvl;
@@ -60,6 +61,7 @@ public class MainScript : MonoBehaviour
         StartCoroutine(IdleFarm());
         StartCoroutine(SaveGameMin());
 
+        offlineIncome.CalculateOfflineIncome(idlemoney);
     }
 
     public void ClDmgCount(int lvl)
@@ -81,7 +83,7 @@ public class MainScript : MonoBehaviour
         moneytext.text = money.ToString();
         boostPowerCounter++;
         boosterScript.Boost1Power(boostPowerCounter);
-        effectsController.CreateEffect(cldmg);
+        effectsController.CreateEffect(cldmg);//Test
         planetHp.DamageCounter(cldmg);
         
     }
@@ -93,7 +95,7 @@ public class MainScript : MonoBehaviour
         {
             idlemoney += upgradelvl[i]*xCounter[i];
         }
-        idlemoney /= 10;
+        idlemoney /= 10; //руди за 0.1 сек
     }
 
     IEnumerator IdleFarm()
@@ -115,10 +117,6 @@ public class MainScript : MonoBehaviour
         StartCoroutine(SaveGameMin());
     }
 
-    void Update()
-    {
-        //moneytext.text = money.ToString();
-    }
 
     public void IsStart()
     {
@@ -162,6 +160,12 @@ public class MainScript : MonoBehaviour
     private void OnApplicationQuit()
     {
         Save();
+        PlayerPrefs.SetString("LastPlayedTime", DateTime.UtcNow.ToString());
+    }
+
+    public void AddMoney(float money)
+    {
+        moneyfloat += money;
     }
     /*
     private void OnApplicationPause()
