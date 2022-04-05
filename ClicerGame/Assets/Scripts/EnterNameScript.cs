@@ -40,4 +40,8 @@ public class EnterNameScript : MonoBehaviour
         }
     }
 
+    public void DestroyObj()
+    {
+        Destroy(background);
+    }
 }

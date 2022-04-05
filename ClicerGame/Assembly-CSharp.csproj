@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\ShopScript.cs" />
     <Compile Include="Assets\Scripts\EffectsController.cs" />
     <Compile Include="Assets\Scripts\BtnShopScript.cs" />
+    <Compile Include="Assets\Scripts\ActiveShopScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\SpritesNotMain\jswars_gfx\license.txt" />

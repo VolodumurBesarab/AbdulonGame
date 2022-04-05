@@ -8,7 +8,8 @@ public class OfflineIncome : MonoBehaviour
 {
     public MainScript mainScript;
     public GameObject massage;
-    
+
+
     public void CalculateOfflineIncome(float income)
     {
         int persent = 1; //ділення офф заррбітка
@@ -16,7 +17,8 @@ public class OfflineIncome : MonoBehaviour
         var lastPlayedTime = DateTime.Parse(PlayerPrefs.GetString("LastPlayedTime", null));
 
         if (lastPlayedTime == null)
-            return;
+            Destroy(massage);
+            //return;
 
         int timeSpanRestriction = 24 * 60 * 60;
         double secondSpan = (DateTime.UtcNow - lastPlayedTime).TotalSeconds;

@@ -11,6 +11,8 @@ public class MainScript : MonoBehaviour
 {
     private string path;
     public GameObject scrollbar;
+    public GameObject activescrollbar;
+    public GameObject offlineMassage;
     public int cldmg;
     public float idlemoney;
     public float moneyfloat;
@@ -38,16 +40,20 @@ public class MainScript : MonoBehaviour
     void Start()
     {
         upgradelvl = new int[baseprise.Length];
+
         if (!PlayerPrefs.HasKey("PlayerName"))
         {
             enterName.SetStartName();
             IsStart();
         }
+        else
+            enterName.DestroyObj();
+
         //IsStart();
         
         //xCounter = new int[shopScript.titles.Length];
         LoadSave();
-        Debug.Log(moneyfloat);
+
 
         IdleMoneyCount();
         
@@ -61,6 +67,7 @@ public class MainScript : MonoBehaviour
         StartCoroutine(IdleFarm());
         StartCoroutine(SaveGameMin());
 
+        offlineMassage.SetActive(true);
         offlineIncome.CalculateOfflineIncome(idlemoney);
     }
 
@@ -72,8 +79,16 @@ public class MainScript : MonoBehaviour
 
     public void ActiveShop()
     {
+        activescrollbar.SetActive(!activescrollbar.activeSelf);
+        if (scrollbar.activeSelf)
+            scrollbar.SetActive(false);
+    }
+
+    public void PasiveShop()
+    {
         scrollbar.SetActive(!scrollbar.activeSelf);
-        Save();
+        if (activescrollbar.activeSelf)
+            activescrollbar.SetActive(false);
     }
 
     public void ButtonClick()
@@ -133,7 +148,6 @@ public class MainScript : MonoBehaviour
     {
         playerName = PlayerPrefs.GetString("PlayerName");
         moneyfloat = PlayerPrefs.GetFloat("Moneyfloat");
-        //Debug.Log(money);
         boostIsActive = PlayerPrefs.GetString("BoostIsActive");
         for (int i = 0; i <= upgradelvl.Length-1; i++)
             upgradelvl[i] = PlayerPrefs.GetInt("Upgradelevel" + i.ToString());
@@ -152,7 +166,6 @@ public class MainScript : MonoBehaviour
 
     public void ExitButton()
     {
-        //Save();
         Save();
         Application.Quit();
     }
@@ -161,12 +174,15 @@ public class MainScript : MonoBehaviour
     {
         Save();
         PlayerPrefs.SetString("LastPlayedTime", DateTime.UtcNow.ToString());
+        //PlayerPrefs.SetString("LastPlayedTime", null);
     }
 
     public void AddMoney(float money)
     {
         moneyfloat += money;
     }
+
+
     /*
     private void OnApplicationPause()
     {

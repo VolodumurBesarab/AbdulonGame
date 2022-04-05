@@ -19,10 +19,6 @@ public class ShopScript : MonoBehaviour
     public int[] price;
     
 
-
-
-
-
     private List<GameObject> list = new List<GameObject>();
     private VerticalLayoutGroup _group;
 
@@ -34,7 +30,7 @@ public class ShopScript : MonoBehaviour
         _group = GetComponent<VerticalLayoutGroup>();
         price = new int[titles.Length];
         //mainScript.baseprise = new int[titles.Length];
-        SetSHop();
+        SetShop();
         
     }
 
@@ -48,7 +44,7 @@ public class ShopScript : MonoBehaviour
         list.Clear();
     }
 
-    void SetSHop()
+    void SetShop()
     {
         RectTransform rectT = content.GetComponent<RectTransform>();
         rectT.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
@@ -153,7 +149,7 @@ public class ShopScript : MonoBehaviour
         }
     }
 
-    public void IdleFarmBtn(int id)
+    private void IdleFarmBtn(int id)
     {
         if (price[id] <= mainScript.moneyfloat)
         {
@@ -165,7 +161,7 @@ public class ShopScript : MonoBehaviour
         }
     }
 
-    public void PriceCount(int i)
+    private void PriceCount(int i)
     {
         price[i] = mainScript.baseprise[i];
         for (int j = 1; j <= mainScript.upgradelvl[i]; j++)
