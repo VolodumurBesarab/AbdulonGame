@@ -62,11 +62,11 @@
     <Compile Include="Assets\Scripts\BoosterScript.cs" />
     <Compile Include="Assets\Scripts\ActiveShopScript.cs" />
     <Compile Include="Assets\Scripts\Effects.cs" />
+    <Compile Include="Assets\Scripts\mainmenu\portallvl.cs" />
     <Compile Include="Assets\Scripts\OfflineIncome.cs" />
     <Compile Include="Assets\Scripts\ShopScript.cs" />
     <Compile Include="Assets\Scripts\EffectsController.cs" />
     <Compile Include="Assets\Scripts\BtnShopScript.cs" />
-    <Compile Include="Assets\Scripts\mainmenu\portallvl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\SpritesNotMain\jswars_gfx\license.txt" />
