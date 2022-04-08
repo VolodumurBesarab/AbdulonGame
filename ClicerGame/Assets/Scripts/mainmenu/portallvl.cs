@@ -10,5 +10,11 @@ public class portallvl : MonoBehaviour
         SceneManager.LoadScene("portal");
         Debug.Log("AZAZAAZAZAZ");//√»
     }
-    
+
+    public void Sity()
+    {
+        SceneManager.LoadScene("Glavn");
+        Debug.Log("AZAZAAZAZAZ");//√»
+    }
+
 }
