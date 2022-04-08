@@ -26,8 +26,10 @@ public class MainScript : MonoBehaviour
     public EffectsController effectsController;
     private string playerName;
     public int[] upgradelvl;
+    public int[] activeUpgradeLvl;
     [SerializeField]
-    public int[] baseprise; //Стартова ціна
+    public int[] baseprise; //Стартова ціна пасив шопа
+    public int[] activeBasePrise; //Стартова ціна ектів шопа
     public float[] xCounter; //Множник карутини в секунду
     public int boostPowerCounter; //Лічильник кліків для буста
 
@@ -35,11 +37,12 @@ public class MainScript : MonoBehaviour
 
     private int money; //Змінна лише для вивода в текст
     public Text moneytext;
-    
+
 
     void Start()
     {
         upgradelvl = new int[baseprise.Length];
+        activeUpgradeLvl = new int[activeBasePrise.Length];
 
         if (!PlayerPrefs.HasKey("PlayerName"))
         {
@@ -59,9 +62,9 @@ public class MainScript : MonoBehaviour
         
         boosterScript.boost = 1;
 
-        ClDmgCount(upgradelvl[0]);
+        ClDmgCount(activeUpgradeLvl[0]);
 
-        if (upgradelvl[1] == 1)
+        if (activeUpgradeLvl[1] == 1)
             boostBtn.SetActive(true);
         
         StartCoroutine(IdleFarm());
@@ -70,6 +73,7 @@ public class MainScript : MonoBehaviour
         offlineMassage.SetActive(true);
         offlineIncome.CalculateOfflineIncome(idlemoney);
     }
+
 
     public void ClDmgCount(int lvl)
     {
@@ -106,7 +110,7 @@ public class MainScript : MonoBehaviour
 
     public void IdleMoneyCount()
     {
-        for (int i = 2; i <= upgradelvl.Length - 1; i++)
+        for (int i = 0; i <= upgradelvl.Length - 1; i++)
         {
             idlemoney += upgradelvl[i]*xCounter[i];
         }
@@ -141,6 +145,10 @@ public class MainScript : MonoBehaviour
         {
             PlayerPrefs.SetInt("Upgradelevel"+i.ToString(), 0);
         }
+        for (int i = 0; i <= activeBasePrise.Length; i++)
+        {
+            PlayerPrefs.SetInt("ActiveUpgradelevel" + i.ToString(), 0);
+        }
     }
 
 
@@ -151,6 +159,8 @@ public class MainScript : MonoBehaviour
         boostIsActive = PlayerPrefs.GetString("BoostIsActive");
         for (int i = 0; i <= upgradelvl.Length-1; i++)
             upgradelvl[i] = PlayerPrefs.GetInt("Upgradelevel" + i.ToString());
+        for (int i = 0; i <= activeBasePrise.Length - 1; i++)
+            activeUpgradeLvl[i] = PlayerPrefs.GetInt("ActiveUpgradelevel" + i.ToString());
     }
 
     public void Save()
@@ -158,10 +168,10 @@ public class MainScript : MonoBehaviour
         PlayerPrefs.SetFloat("Moneyfloat", moneyfloat);
         Debug.Log(moneyfloat);
         PlayerPrefs.SetString("BoostIsActive", boostIsActive);
-        for (int i = 0; i <= upgradelvl.Length-1; i++)
-        {
+        for (int i = 0; i <= upgradelvl.Length-1; i++)        
             PlayerPrefs.SetInt("Upgradelevel" + i.ToString(), upgradelvl[i]);
-        }
+        for (int i = 0; i <= activeBasePrise.Length - 1; i++)
+            PlayerPrefs.SetInt("ActiveUpgradelevel" + i.ToString(), activeUpgradeLvl[i]);
     }
 
     public void ExitButton()
@@ -170,6 +180,43 @@ public class MainScript : MonoBehaviour
         Application.Quit();
     }
 
+    public void AddMoney(float money)
+    {
+        moneyfloat += money;
+    }
+
+    public void RemoveMoney(float money)
+    {
+        moneyfloat += money;
+    }
+
+
+    public bool CheckMoney(float prise)
+    {
+        if (moneyfloat >= prise)
+        {
+            moneyfloat -= prise;
+            return true;
+        }
+        else
+            return false;
+    }
+
+
+    private int test; 
+    public int Test
+    {
+        get { return test; }
+        set
+        { 
+            test = value;
+        }
+    }
+
+
+
+
+
     private void OnApplicationQuit()
     {
         Save();
@@ -177,10 +224,7 @@ public class MainScript : MonoBehaviour
         //PlayerPrefs.SetString("LastPlayedTime", null);
     }
 
-    public void AddMoney(float money)
-    {
-        moneyfloat += money;
-    }
+    
 
 
     /*

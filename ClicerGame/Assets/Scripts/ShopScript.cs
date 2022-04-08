@@ -43,7 +43,17 @@ public class ShopScript : MonoBehaviour
         }
         list.Clear();
     }
-
+    private int Test()//ne robe
+    {
+        int j;
+        for (var i = 0; i < titles.Length; i++)
+        {        
+            if (mainScript.upgradelvl[i] == 0)
+                j = i;
+        }
+        return 10;
+            
+    }
     void SetShop()
     {
         RectTransform rectT = content.GetComponent<RectTransform>();
@@ -57,6 +67,7 @@ public class ShopScript : MonoBehaviour
             tr.sizeDelta = new Vector2(tr.rect.width, h * titles.Length);
             Destroy(pr1.gameObject);
 
+            //for (var i = 0; i < titles.Length; i++)
             for (var i = 0; i < titles.Length; i++)
             {
                 var pr = Instantiate(button, transform);
@@ -66,15 +77,18 @@ public class ShopScript : MonoBehaviour
                 pr.GetComponentsInChildren<Text>()[3].text = mainScript.upgradelvl[i].ToString();
                 PriceCount(i);
                 pr.GetComponentsInChildren<Text>()[2].text = price[i].ToString();
-                pr.GetComponentInChildren<Button>().onClick.AddListener(() => ShopList(i1));
+                pr.GetComponentInChildren<Button>().onClick.AddListener(() => IdleFarmBtn(i1));
                 list.Add(pr);
+                if (mainScript.upgradelvl[i] == 0)
+                    return;
             }
         }
 
 
     }
 
-    void ShopList(int id)
+    /*
+    private void ShopList(int id)
     {
         switch (id)
         {
@@ -148,16 +162,18 @@ public class ShopScript : MonoBehaviour
 
         }
     }
+    */
 
     private void IdleFarmBtn(int id)
     {
-        if (price[id] <= mainScript.moneyfloat)
+        if (mainScript.CheckMoney(price[id]))
         {
-            mainScript.moneyfloat -= price[id];
             mainScript.upgradelvl[id] ++;
             list[id].GetComponentsInChildren<Text>()[3].text = mainScript.upgradelvl[id].ToString();
             PriceCount(id);
             list[id].GetComponentsInChildren<Text>()[2].text = price[id].ToString();
+            if (mainScript.upgradelvl[id] == 1)
+                SetShop();
         }
     }
 
@@ -167,7 +183,4 @@ public class ShopScript : MonoBehaviour
         for (int j = 1; j <= mainScript.upgradelvl[i]; j++)
             price[i] += (int)price[i] / 3;
     }
-
- 
-
 }
