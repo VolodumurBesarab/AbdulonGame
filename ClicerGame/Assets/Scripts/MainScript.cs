@@ -139,7 +139,9 @@ public class MainScript : MonoBehaviour
 
     public void IsStart()
     {
-        PlayerPrefs.SetInt("Moneyfloat", 0);
+        PlayerPrefs.SetFloat("Moneyfloat", 0);
+        PlayerPrefs.SetInt("Stage", 1);
+        PlayerPrefs.SetInt("MonsterKill", 0);
         PlayerPrefs.SetString("BoostIsActive", "false");
         for (int i = 0; i <= shopScript.titles.Length; i++)
         {
