@@ -11,7 +11,6 @@ public class ShopScript : MonoBehaviour
     public string[] titles;
     public GameObject button;
     public GameObject content;
-    public Sprite imgbtn;
     public MainScript mainScript;
     public GameObject dmgBtn;
 
@@ -43,17 +42,7 @@ public class ShopScript : MonoBehaviour
         }
         list.Clear();
     }
-    private int Test()//ne robe
-    {
-        int j;
-        for (var i = 0; i < titles.Length; i++)
-        {        
-            if (mainScript.upgradelvl[i] == 0)
-                j = i;
-        }
-        return 10;
-            
-    }
+
     void SetShop()
     {
         RectTransform rectT = content.GetComponent<RectTransform>();
@@ -71,8 +60,8 @@ public class ShopScript : MonoBehaviour
             for (var i = 0; i < titles.Length; i++)
             {
                 var pr = Instantiate(button, transform);
-                pr.GetComponentInChildren<Text>().text = titles[i];
-                pr.GetComponentsInChildren<Image>()[1].sprite = imgbtn;
+                pr.GetComponentInChildren<Text>().text = titles[i];                
+                pr.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>("PasiveShop/" + i); 
                 var i1 = i;
                 pr.GetComponentsInChildren<Text>()[3].text = mainScript.upgradelvl[i].ToString();
                 PriceCount(i);

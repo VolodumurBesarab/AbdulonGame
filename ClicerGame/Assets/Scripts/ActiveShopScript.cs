@@ -8,7 +8,6 @@ public class ActiveShopScript : MonoBehaviour
 
     public GameObject button;
     public GameObject content;
-    public Sprite imgbtn;
     public MainScript mainScript;
     public GameObject boost1;
 
@@ -60,7 +59,7 @@ public class ActiveShopScript : MonoBehaviour
             {
                 var pr = Instantiate(button, transform);
                 pr.GetComponentInChildren<Text>().text = titles[i];
-                pr.GetComponentsInChildren<Image>()[1].sprite = imgbtn;//need edit
+                pr.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>("ActiveShop/" + i);
                 var i1 = i;
                 pr.GetComponentsInChildren<Text>()[3].text = mainScript.activeUpgradeLvl[i].ToString();
                 PriceCount(i);

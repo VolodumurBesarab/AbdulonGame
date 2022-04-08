@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlanetHp : MonoBehaviour
 {
     [SerializeField]
-    private int maxHp = 3200, currentHp;
+    private int maxHp = 3200, currentHp, startHp, bossHp;
     public int core;
     [SerializeField]
     private double percentHp;
@@ -16,6 +16,7 @@ public class PlanetHp : MonoBehaviour
 
     private void Start()
     {
+        startHp = 20;
         maxHp = 1500;
         currentHp = maxHp;
         currentPersent = 100;
@@ -33,25 +34,25 @@ public class PlanetHp : MonoBehaviour
         //percentHp = maxHp / currentHp * 100;
         //percentHp = currentPersent * 100;
         //percentHp = percentHp / maxHp;
-        Debug.Log(currentPersent);
+        //Debug.Log(currentPersent);
         GetComponentInChildren<Text>().text = maxHp + " / " + currentHp;
         if (currentHp <= 0)
             NewPlanet();
         ScaleSize();
     }
     
-    public void ScaleSize()
-    {
-        //var pref = GetComponentsInChildren<Image>();
-        
-        hpImg.rectTransform.localScale = new Vector2((int)currentPersent, 1);
-        
+
+    private void ScaleSize()
+    {  
+        hpImg.rectTransform.localScale = new Vector2((int)currentPersent, 1);        
     }
 
-    public void NewPlanet()
+    private void NewPlanet()
     {
         // отигруєм анимацию
         maxHp = currentHp = 9999999;
     }
+
+
 
 }

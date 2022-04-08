@@ -8,6 +8,7 @@ public class portallvl : MonoBehaviour
     public void GamePortal()
     {
         SceneManager.LoadScene("portal");
+        Debug.Log("AZAZAAZAZAZ");//√»
     }
     
 }
