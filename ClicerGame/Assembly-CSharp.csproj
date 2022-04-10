@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\BoosterScript.cs" />
     <Compile Include="Assets\Scripts\ActiveShopScript.cs" />
     <Compile Include="Assets\Scripts\Effects.cs" />
+    <Compile Include="Assets\Scripts\StoneScript.cs" />
     <Compile Include="Assets\Scripts\mainmenu\portallvl.cs" />
     <Compile Include="Assets\Scripts\OfflineIncome.cs" />
     <Compile Include="Assets\Scripts\ShopScript.cs" />

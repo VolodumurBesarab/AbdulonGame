@@ -97,12 +97,14 @@ public class MainScript : MonoBehaviour
 
     public void ButtonClick()
     {
-        moneyfloat += cldmg;
-        money = (int)moneyfloat;
-        moneytext.text = money.ToString();
+        //moneyfloat += cldmg;
+        //money = (int)moneyfloat;
+        //moneytext.text = money.ToString();
+
         boostPowerCounter++;
         boosterScript.Boost1Power(boostPowerCounter);
-        effectsController.CreateEffect(cldmg);//Test
+        effectsController.CreateEffect(cldmg);
+        effectsController.StoneSpavner();
         planetHp.DamageCounter(cldmg);
         
     }
@@ -115,16 +117,17 @@ public class MainScript : MonoBehaviour
             idlemoney += upgradelvl[i]*xCounter[i];
         }
         idlemoney /= 10; //руди за 0.1 сек
+        planetHp.DamageCounter(idlemoney);
     }
 
     IEnumerator IdleFarm()
     {
         yield return new WaitForSeconds(0.1f);
         IdleMoneyCount();
-        moneyfloat += idlemoney;
+        //moneyfloat += idlemoney;
         //money = (int)moneyfloat;
         //Debug.Log(moneyfloat);
-        money = (int)moneyfloat;
+        //money = (int)moneyfloat;
         moneytext.text = money.ToString();
         StartCoroutine(IdleFarm());
     }
@@ -185,11 +188,15 @@ public class MainScript : MonoBehaviour
     public void AddMoney(float money)
     {
         moneyfloat += money;
+        this.money = (int)moneyfloat;
+        moneytext.text = this.money.ToString();
     }
 
     public void RemoveMoney(float money)
     {
-        moneyfloat += money;
+        moneyfloat -= money;
+        this.money = (int)moneyfloat;
+        moneytext.text = this.money.ToString();
     }
 
 

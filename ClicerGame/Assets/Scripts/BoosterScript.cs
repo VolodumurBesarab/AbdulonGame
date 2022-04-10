@@ -19,14 +19,14 @@ public class BoosterScript : MonoBehaviour
     }
     public void Booster1()
     {
-        if (mainScript.boostPowerCounter < 500)
+        if (mainScript.boostPowerCounter < 300)//500
             return;
         mainScript.boostPowerCounter = 0;
         for (int i = 0; i <= 9; i++)
             Destroy(layout.transform.GetChild(i).gameObject);
 
         boost = 5;
-        mainScript.ClDmgCount(shopScript.mainScript.upgradelvl[0]);
+        mainScript.ClDmgCount(shopScript.mainScript.activeUpgradeLvl[0]);
         Invoke("BoosterInvokeMatYogoTyda", 20);        
     }
 
@@ -34,14 +34,14 @@ public class BoosterScript : MonoBehaviour
     private void BoosterInvokeMatYogoTyda()
     {
         boost = 1;
-        mainScript.ClDmgCount(shopScript.mainScript.upgradelvl[0]);
+        mainScript.ClDmgCount(shopScript.mainScript.activeUpgradeLvl[0]);
     }
 
     public void Boost1Power (int counter)
     {
-        if (counter > 500)
+        if (counter > 300)
             return;
-        if (counter % 50 == 0)
+        if (counter % 30 == 0)
             Instantiate(segment, layout.transform);
     }
 
